@@ -14,6 +14,7 @@ jobs:
         TF_VAR_proxmox_endpoint: ${{ secrets.PROXMOX_ENDPOINT }}
         TF_VAR_proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
         TF_VAR_proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
+        TF_VAR_dns01_password: ${{ secrets.DNS01_PASSWORD }}
 
     steps:
     - name: Checkout repository
@@ -46,6 +47,7 @@ jobs:
         TF_VAR_proxmox_endpoint: ${{ secrets.PROXMOX_ENDPOINT }}
         TF_VAR_proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
         TF_VAR_proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
+        TF_VAR_dns01_password: ${{ secrets.DNS01_PASSWORD }}
 
     steps:
     - name: Checkout repository
@@ -61,3 +63,6 @@ jobs:
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
+    
+    - name: Terraform Output
+      run: terraform output
