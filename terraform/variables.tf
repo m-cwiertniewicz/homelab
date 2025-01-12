@@ -15,3 +15,9 @@ variable "proxmox_password" {
   type        = string
   sensitive   = true
 }
+
+variable "dns01_password" {
+  description = "DNS01 password"
+  type        = string
+  sensitive   = true
+}
