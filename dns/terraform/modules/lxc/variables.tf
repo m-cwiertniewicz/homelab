@@ -64,3 +64,8 @@ variable "tags" {
   description = "The tags for the container"
   type        = list(string)
 }
+
+variable "ssh_keys" {
+  description = "The SSH public keys for the container"
+  type        = list(string)
+}

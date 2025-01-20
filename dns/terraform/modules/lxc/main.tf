@@ -16,6 +16,7 @@ resource "proxmox_virtual_environment_container" "container" {
     hostname = var.hostname
     user_account {
       password = var.password
+      keys     = var.ssh_keys
     }
 
     ip_config {

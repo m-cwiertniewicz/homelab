@@ -3,7 +3,7 @@ name: DNS Workflow
 on:
     push:
         branches:
-            - structure_dns
+            - ansible_dns
     workflow_dispatch:
 
 jobs:
