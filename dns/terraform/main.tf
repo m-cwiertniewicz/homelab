@@ -30,7 +30,9 @@ module "lxc_dns01" {
   node_name              = "proxmox"
   hostname               = "dns01"
   password               = var.dns01_password
-  ipv4_address           = "dhcp"
+  ipv4_address           = "192.168.10.111/24"
+  ipv4_gateway           = "192.168.10.1"
+  dns                    = ["192.168.10.1"]
   memory_dedicated       = 1024
   template_file_id       = "local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst"
   os_type                = "debian"
