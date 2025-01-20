@@ -1,15 +1,17 @@
-name: Terraform Workflow
+name: DNS Workflow
 
 on:
+    push:
+        branches:
+            - structure_dns
     workflow_dispatch:
-
-defaults:
-  run:
-    working-directory: ./terraform
 
 jobs:
   terraform-plan:
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: ./dns/terraform
     env:
         TF_VAR_proxmox_endpoint: ${{ secrets.PROXMOX_ENDPOINT }}
         TF_VAR_proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
@@ -41,6 +43,9 @@ jobs:
           echo "Terraform plan accepted."
 
   terraform-apply:
+    defaults:
+      run:
+        working-directory: ./dns/terraform
     needs: review
     runs-on: self-hosted
     env:
