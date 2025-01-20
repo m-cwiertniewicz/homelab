@@ -59,3 +59,8 @@ variable "disk_size" {
   type        = number
   default     = 10
 }
+
+variable "tags" {
+  description = "The tags for the container"
+  type        = list(string)
+}

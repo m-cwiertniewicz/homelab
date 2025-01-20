@@ -10,6 +10,7 @@ terraform {
 resource "proxmox_virtual_environment_container" "container" {
   description = "Managed by Terraform"
   node_name = var.node_name
+  tags = var.tags
 
   initialization {
     hostname = var.hostname
@@ -42,4 +43,5 @@ resource "proxmox_virtual_environment_container" "container" {
     datastore_id = var.datastore_id
     size         = var.disk_size
   }
+
 }

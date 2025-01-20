@@ -36,4 +36,5 @@ module "lxc_dns01" {
   os_type                = "debian"
   datastore_id           = "data_disk"
   disk_size              = 10
+  tags                   = ["dns"] 
 }
