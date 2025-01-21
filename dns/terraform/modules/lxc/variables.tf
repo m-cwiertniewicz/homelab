@@ -3,6 +3,16 @@ variable "node_name" {
   type        = string
 }
 
+variable "unprivileged" {
+  description = "Whether the container is unprivileged"
+  type        = bool
+}
+
+variable "nesting" {
+  description = "Whether the container supports nesting"
+  type        = bool
+}
+
 variable "hostname" {
   description = "The hostname of the container"
   type        = string

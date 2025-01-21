@@ -95,5 +95,8 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: False
           ANSIBLE_PRIVATE_KEY_FILE: ./deploy.key
           CONTAINER_IP: ${{ needs.terraform-apply.outputs.container_ip }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
+          sleep 10s
           ansible-playbook main.yml -i "$CONTAINER_IP," -u $ANSIBLE_USER

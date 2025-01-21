@@ -11,6 +11,11 @@ resource "proxmox_virtual_environment_container" "container" {
   description = "Managed by Terraform"
   node_name = var.node_name
   tags = var.tags
+  unprivileged = var.unprivileged
+  
+  features {
+    nesting = var.nesting
+  }
 
   cpu {
     cores = var.cpu_cores

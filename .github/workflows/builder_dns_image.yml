@@ -1,0 +1,26 @@
+name: Build bind9 image on Self-Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: ./dns/Docker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build -t cwiara/bind9-image:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push cwiara/bind9-image:latest
