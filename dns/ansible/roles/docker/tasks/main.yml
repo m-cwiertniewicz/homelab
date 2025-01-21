@@ -1,0 +1,10 @@
+---
+- name: Copy install_docker.sh script to remote
+  ansible.builtin.copy:
+    src: ./roles/docker/scripts/install_docker.sh
+    dest: /tmp/install_docker.sh
+    mode: '0755'
+
+- name: Run install_docker.sh script
+  ansible.builtin.command:
+    cmd: /tmp/install_docker.sh

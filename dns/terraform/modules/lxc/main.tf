@@ -12,6 +12,10 @@ resource "proxmox_virtual_environment_container" "container" {
   node_name = var.node_name
   tags = var.tags
 
+  cpu {
+    cores = var.cpu_cores
+  }
+
   initialization {
     hostname = var.hostname
     user_account {
