@@ -16,12 +16,19 @@ resource "proxmox_virtual_environment_container" "container" {
     hostname = var.hostname
     user_account {
       password = var.password
+      keys     = var.ssh_keys
     }
 
     ip_config {
       ipv4 {
         address = var.ipv4_address
+        gateway = var.ipv4_gateway
       }
+    }
+    
+    dns {
+      domain  = "domain.name"
+      servers = var.dns
     }
   }
 

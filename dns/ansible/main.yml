@@ -1,0 +1,7 @@
+---
+- name: Configure bind9 DNS server
+  hosts: all
+  become: yes
+
+  roles:
+    - common

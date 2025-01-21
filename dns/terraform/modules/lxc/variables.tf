@@ -20,6 +20,11 @@ variable "ipv4_address" {
   default     = "dhcp"
 }
 
+variable "ipv4_gateway" {
+  description = "The IPv4 gateway of the container"
+  type        = string
+}
+
 variable "memory_dedicated" {
   description = "The dedicated amount of RAM (in MB)"
   type        = number
@@ -30,6 +35,11 @@ variable "network_interface_name" {
   description = "The name of the network interface (e.g., 'eth0')"
   type        = string
   default     = "eth0"
+}
+
+variable "dns" {
+  description = "The DNS servers for the container"
+  type        = list(string)
 }
 
 variable "network_bridge" {
@@ -62,5 +72,10 @@ variable "disk_size" {
 
 variable "tags" {
   description = "The tags for the container"
+  type        = list(string)
+}
+
+variable "ssh_keys" {
+  description = "The SSH public keys for the container"
   type        = list(string)
 }
