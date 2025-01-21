@@ -14,6 +14,12 @@ variable "password" {
   sensitive   = true
 }
 
+variable "cpu_cores" {
+  description = "The number of CPU cores for the container"
+  type        = number
+  default     = 1
+}
+
 variable "ipv4_address" {
   description = "The IPv4 address of the container (e.g., 'dhcp' or '192.168.1.100/24')"
   type        = string
