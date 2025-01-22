@@ -20,4 +20,4 @@
 ## Technologies Used 💻
 
 - **IaC**: Terraform, Ansible
-- **Automation**: GitHub Actions
+- **Automation**: GitHub Actions, Docker
