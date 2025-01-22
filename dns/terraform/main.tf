@@ -31,6 +31,8 @@ module "lxc_dns01" {
   hostname               = "dns01"
   password               = var.dns01_password
   cpu_cores              = 2 
+  unprivileged           = true
+  nesting                = true  
   ipv4_address           = "192.168.10.111/24"
   ipv4_gateway           = "192.168.10.1"
   dns                    = ["192.168.10.1"]

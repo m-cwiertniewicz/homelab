@@ -5,6 +5,31 @@
     dest: /tmp/install_docker.sh
     mode: '0755'
 
-- name: Run install_docker.sh script
+- name: Install packages
+  ansible.builtin.apt:
+    update_cache: yes
+    name:
+      - ca-certificates
+      - curl
+    state: present
+
+- name: Prepare docker installation script
   ansible.builtin.command:
     cmd: /tmp/install_docker.sh
+
+- name: Install Docker packages
+  ansible.builtin.apt:
+    update_cache: yes
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+
+- name: Include start.yml
+  include_tasks: start.yml
+  vars:
+    docker_username: "{{ lookup('env', 'DOCKER_USERNAME') }}"
+    docker_password: "{{ lookup('env', 'DOCKER_PASSWORD') }}"
