@@ -21,3 +21,4 @@
 
 - **IaC**: Terraform, Ansible
 - **Automation**: GitHub Actions, Docker
+- **DNS**: BIND 9
