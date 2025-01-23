@@ -14,15 +14,25 @@
     - name: Pull the private Docker image
       community.docker.docker_image:
         name: cwiara/bind9-image
-        tag: latest
+        tag: 1.0.1
         source: pull
 
     - name: Run the Docker container
       community.docker.docker_container:
         name: bind9
-        image: cwiara/bind9-image:latest
+        image: cwiara/bind9-image:1.0.1
         state: started
         restart_policy: always
         published_ports:
           - "53:53/udp"  
           - "53:53/tcp" 
+        volumes:
+          - /etc/bind/named.conf:/etc/bind/named.conf
+          - /etc/bind/named.conf.local:/etc/bind/named.conf.local
+          - /etc/bind/named.conf.options:/etc/bind/named.conf.options
+          - /etc/bind/zones:/etc/bind/zones
+
+    - name: Restart BIND inside the container
+      community.docker.docker_container_exec:
+        container: bind9
+        command: service named restart

@@ -28,6 +28,9 @@
       - docker-compose-plugin
     state: present
 
+- name: Include bind9.yml
+  include_tasks: bind9.yml
+
 - name: Include start.yml
   include_tasks: start.yml
   vars:
