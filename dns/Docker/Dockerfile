@@ -11,6 +11,4 @@ RUN apt-get update && apt-get install -y \
 EXPOSE 53/udp
 EXPOSE 53/tcp
 
-VOLUME /etc/bind
-
-CMD ["named", "-g", "-c", "/etc/bind/named.conf"]
+CMD ["named", "-g"]

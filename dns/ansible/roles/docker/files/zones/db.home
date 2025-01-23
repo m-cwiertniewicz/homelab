@@ -1,0 +1,14 @@
+$TTL    86400
+@       IN      SOA     ns1.home. root.home. (
+                        2025012301 ; Serial
+                        28800      ; Refresh
+                        14400      ; Retry
+                        3600000    ; Expire
+                        86400 )    ; Minimum TTL
+
+        IN      NS      ns1.home.
+ns1     IN      A       192.168.10.111    
+
+router    IN      A       192.168.10.1
+proxmox   IN      A       192.168.10.10
+dns01     IN      A       192.168.10.111

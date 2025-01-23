@@ -19,8 +19,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t cwiara/bind9-image:latest .
+          docker build -t cwiara/bind9-image:1.0.1 .
 
       - name: Push Docker image
         run: |
-          docker push cwiara/bind9-image:latest
+          docker push cwiara/bind9-image:1.0.1
