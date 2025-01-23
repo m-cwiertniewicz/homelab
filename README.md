@@ -12,7 +12,7 @@
 ## What’s Included 🔍
 
 - 🛠️ **Infrastructure as Code (IaC)**: Configurations for automated environment creation.
-- 🔜 **Kubernetes & Containerization**: Managing applications in containers.
+- 🛠️ **Kubernetes & Containerization**: Managing applications in containers.
 - 🛠️ **CI/CD**: Automation pipelines for building, testing, and deploying applications.
 - 🔜 **Monitoring & Logging**: Configurations for Prometheus, Grafana, and other monitoring tools.
 - 🛠️ **Documentation**: Architecture diagrams, setup instructions, and examples.
