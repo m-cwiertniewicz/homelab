@@ -1,0 +1,39 @@
+---
+- name: Copy install_docker.sh script to remote
+  ansible.builtin.copy:
+    src: ./roles/docker/scripts/install_docker.sh
+    dest: /tmp/install_docker.sh
+    mode: '0755'
+
+- name: Install packages
+  ansible.builtin.apt:
+    update_cache: yes
+    name:
+      - ca-certificates
+      - curl
+    state: present
+
+- name: Prepare docker installation script
+  ansible.builtin.command:
+    cmd: /tmp/install_docker.sh
+
+- name: Install Docker packages
+  ansible.builtin.apt:
+    update_cache: yes
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "minikube"
+    groups: docker
+    append: yes
+
+- name: Reset ssh connection to allow user changes to affect ansible user
+  ansible.builtin.meta:
+    reset_connection
