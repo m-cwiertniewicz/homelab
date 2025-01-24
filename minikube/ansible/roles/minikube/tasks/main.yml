@@ -10,6 +10,7 @@
     sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
   when: minikube_check.stdout == ""
 
-- name: Prepare docker installation script
+- name: Start Minikube
   ansible.builtin.command:
     cmd: minikube start --driver=docker
+  become: no
