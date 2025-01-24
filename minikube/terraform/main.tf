@@ -51,14 +51,14 @@ resource "proxmox_virtual_environment_vm" "minikube_vm" {
   }
 
   memory {
-    dedicated = 4096
+    dedicated = 6144
   }
 
   disk {
     datastore_id = "data_disk"
     file_id      = proxmox_virtual_environment_download_file.latest_ubuntu_24_noble_qcow2_img.id
     interface    = "scsi0"
-    size         = 10
+    size         = 30
   }
 
   initialization {
