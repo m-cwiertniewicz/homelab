@@ -1,0 +1,15 @@
+---
+- name: Check if Minikube is installed
+  ansible.builtin.command: which minikube
+  register: minikube_check
+  ignore_errors: yes
+
+- name: Download and install Minikube binary
+  ansible.builtin.shell: |
+    curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+  when: minikube_check.stdout == ""
+
+- name: Prepare docker installation script
+  ansible.builtin.command:
+    cmd: minikube start --driver=docker
