@@ -51,7 +51,7 @@ resource "proxmox_virtual_environment_vm" "minikube_vm" {
   }
 
   memory {
-    dedicated = 6144
+    dedicated = 8192
   }
 
   disk {

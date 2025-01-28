@@ -12,5 +12,79 @@
 
 - name: Start Minikube
   ansible.builtin.command:
-    cmd: minikube start --driver=docker
+    cmd: minikube start --driver=docker --addons=dashboard
   become: no
+
+- name: Create file for logs
+  ansible.builtin.file:
+    path: /var/log/kubectlproxy.log
+    state: touch
+    mode: '0644'
+    owner: minikube
+    group: minikube
+
+- name: Create file for logs
+  ansible.builtin.file:
+    path: /var/log/kubectlportforward.log
+    state: touch
+    mode: '0644'
+    owner: minikube
+    group: minikube
+
+- name: Create systemd unit for kubectl proxy
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/kubectl-proxy.service
+    content: |
+      [Unit]
+      Description=kubectl proxy service
+      After=network.target
+
+      [Service]
+      ExecStart=/snap/bin/kubectl proxy --address='192.168.10.200' --accept-hosts='^192\\.168\\.10\\..*$'
+      Restart=always
+      StandardOutput=file:/var/log/kubectlproxy.log
+      StandardError=file:/var/log/kubectlproxy.log
+
+      [Install]
+      WantedBy=multi-user.target
+  register: kubectl_proxy_service
+
+- name: Create systemd unit for kubectl port-forward
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/kubectl-port-forward.service
+    content: |
+      [Unit]
+      Description=kubectl port-forward service
+      After=network.target
+
+      [Service]
+      User=minikube
+      Environment="KUBECONFIG=/home/minikube/.kube/config"
+      ExecStart=/usr/bin/env KUBECONFIG=/home/minikube/.kube/config /snap/bin/kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 8080:80
+      Restart=always
+      RestartSec=5
+      StandardOutput=append:/var/log/kubectlportforward.log
+      StandardError=append:/var/log/kubectlportforward.log
+
+      [Install]
+      WantedBy=multi-user.target
+  register: kubectl_port_forward_service
+
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  become: yes
+
+- name: Enable kubectl proxy service
+  ansible.builtin.systemd:
+    name: kubectl-proxy.service
+    enabled: yes
+    state: started
+  become: yes
+
+- name: Enable kubectl port-forward
+  ansible.builtin.systemd:
+    name: kubectl-port-forward.service
+    enabled: yes
+    state: started
+  become: yes

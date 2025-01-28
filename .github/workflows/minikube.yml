@@ -97,5 +97,5 @@ jobs:
           ANSIBLE_PRIVATE_KEY_FILE: ./k8s.key
           vm_IP: ${{ needs.terraform-apply.outputs.vm_ip }}
         run: |
-          sleep 10s
+          sleep 30s
           ansible-playbook main.yml -i "$vm_IP," -u $ANSIBLE_USER
