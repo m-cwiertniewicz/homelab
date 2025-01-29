@@ -13,6 +13,10 @@
       - curl
     state: present
 
+- name: Install kubectl
+  ansible.builtin.command:
+    cmd: snap install kubectl --classic
+
 - name: Prepare docker installation script
   ansible.builtin.command:
     cmd: /tmp/install_docker.sh
